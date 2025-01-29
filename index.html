@@ -9,24 +9,43 @@
 <body>
     <div class="container">
         <h1>MTRacker PCB</h1>
+        <div class="pcb-images">
+            <h2>PCB Images</h2>
+            <div class="carousel">
+                <div class="carousel-images">
+                    <img src="pcbimage/front.png" alt="PCB front">
+                    <img src="pcbimage/back.png" alt="PCB back">
+                    <img src="pcbimage/front_side.png" alt="PCB sidefront">
+                    <img src="pcbimage/right_front.png" alt="PCB rfront">
+                </div>
+                <button class="prev" onclick="changeSlide(-1, 'pcb')">&#10094;</button>
+                <button class="next" onclick="changeSlide(1, 'pcb')">&#10095;</button>
+            </div>
+        </div>
+        <div class="schematic-images">
+            <h2>Schematic</h2>
+            <div class="carousel">
+                <div class="carousel-images">
+                    <img src="pcbimage/schem1.png" alt="Schematic 1">
+                    <img src="pcbimage/schem2.png" alt="Schematic 2">
+                </div>
+                <button class="prev" onclick="changeSlide(-1, 'schematic')">&#10094;</button>
+                <button class="next" onclick="changeSlide(1, 'schematic')">&#10095;</button>
+            </div>
+        </div>
         <div class="description-section">
             <h2>Description</h2>
             <p>very description</p>
         </div>
-        <div class="bom-section">
-            <h2>Bill of Materials (BOM)</h2>
-            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQsy_H-FAUhzxTOaep1nTXmmBmow1XRcCTzLxEYd9jLdOZoQAsqlvt8lDDC_Igs_g/pubhtml?widget=true" width="1000px" height="500px" ></iframe> </iframe>
-        </div>
         <div class="embed-section">
             <h2>Final PCB Design</h2>
-            <iframe src="https://tracespace.io/view/?boardUrl=https%3A%2F%2Fraw.githubusercontent.com%2FJumpSushi%2Fmtrstalker%2Fmain%2F%2Fpcb%2Fmtrgerber.zip" width = "1000px" height="800px"></iframe>
+            <iframe src="https://tracespace.io/view/?boardUrl=https%3A%2F%2Fraw.githubusercontent.com%2FJumpSushi%2Fmtrstalker%2Fmain%2Fmtrgerber.zip"></iframe>
         </div>
-        <div class="pcb-images">
-            <img src="pcbimage/front.png" alt="PCB front">
-            <img src="pcbimage/back.png" alt="PCB back">
-            <img src="pcbimage/front_side.png" alt="PCB sidefront">
-            <img src="pcbimage/right_front.png" alt="PCB rfront">
+        <div class="bom-section">
+            <h2>Bill of Materials (BOM)</h2>
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQsy_H-FAUhzxTOaep1nTXmmBmow1XRcCTzLxEYd9jLdOZoQAsqlvt8lDDC_Igs_g/pubhtml?widget=true&amp;headers=false"></iframe>
         </div>
     </div>
+    <script src="scripts.js"></script>
 </body>
 </html>

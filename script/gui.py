@@ -1,4 +1,4 @@
-from api import MTRAPI
+from script.api import MTRAPI
 import tkinter as tk
 from tkinter import ttk
 import threading
@@ -8,10 +8,9 @@ from ttkthemes import ThemedTk
 
 class mtrstalker:
     def __init__(self):
-        # Update map constants
-        self.STATION_SPACING = 90  # Increased spacing
-        self.MAP_MARGIN = 70      # Increased margin
-        self.MAP_HEIGHT = 200     # Increased height
+        self.STATION_SPACING = 90  
+        self.MAP_MARGIN = 70      
+        self.MAP_HEIGHT = 200     
         
         self.api = MTRAPI()
         self.root = ThemedTk(theme="arc")
