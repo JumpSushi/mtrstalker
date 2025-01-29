@@ -3,49 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTRacker PCB</title>
+    <title>MTRacker</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h1>MTRacker PCB</h1>
-        <div class="pcb-images">
+        <div class="header-section">
+            <h1>MTRacker</h1>
+            <a href="https://github.com/JumpSushi/mtrstalker" class="github-link">View on GitHub</a>
+        </div>
+
+        <div class="images-section">
             <h2>PCB Images</h2>
-            <div class="carousel">
-                <div class="carousel-images">
-                    <img src="pcbimage/front.png" alt="PCB front">
-                    <img src="pcbimage/back.png" alt="PCB back">
-                    <img src="pcbimage/front_side.png" alt="PCB sidefront">
-                    <img src="pcbimage/right_front.png" alt="PCB rfront">
-                </div>
-                <button class="prev" onclick="changeSlide(-1, 'pcb')">&#10094;</button>
-                <button class="next" onclick="changeSlide(1, 'pcb')">&#10095;</button>
+            <div class="image-grid">
+                <a href="https://raw.githubusercontent.com/JumpSushi/mtrstalker/main/pcbimage/front.png" data-lightbox="pcb" data-title="Front View">
+                    <img src="https://raw.githubusercontent.com/JumpSushi/mtrstalker/main/pcbimage/front.png" alt="PCB Front">
+                </a>
+                <a href="https://raw.githubusercontent.com/JumpSushi/mtrstalker/main/pcbimage/back.png" data-lightbox="pcb" data-title="Back View">
+                    <img src="https://raw.githubusercontent.com/JumpSushi/mtrstalker/main/pcbimage/back.png" alt="PCB Back">
+                </a>
+                <a href="https://raw.githubusercontent.com/JumpSushi/mtrstalker/main/pcbimage/right_front.png" data-lightbox="pcb" data-title="Right Front View">
+                    <img src="https://raw.githubusercontent.com/JumpSushi/mtrstalker/main/pcbimage/right_front.png" alt="PCB Right Front">
+                </a>
             </div>
         </div>
-        <div class="schematic-images">
+
+        <div class="schematic-section">
             <h2>Schematic</h2>
-            <div class="carousel">
-                <div class="carousel-images">
-                    <img src="pcbimage/schem1.png" alt="Schematic 1">
-                    <img src="pcbimage/schem2.png" alt="Schematic 2">
-                </div>
-                <button class="prev" onclick="changeSlide(-1, 'schematic')">&#10094;</button>
-                <button class="next" onclick="changeSlide(1, 'schematic')">&#10095;</button>
+            <div class="image-grid">
+                <a href="https://raw.githubusercontent.com/JumpSushi/mtrstalker/main/pcbimage/schem1.png" data-lightbox="schematic" data-title="Schematic">
+                    <img src="https://raw.githubusercontent.com/JumpSushi/mtrstalker/main/pcbimage/schem1.png" alt="Schematic">
+                </a>
+                <a href="https://raw.githubusercontent.com/JumpSushi/mtrstalker/main/pcbimage/schem2.png" data-lightbox="schematic2" data-title="Schematic">
+                    <img src="https://raw.githubusercontent.com/JumpSushi/mtrstalker/main/pcbimage/schem2.png" alt="Schematic">
+                </a>
             </div>
         </div>
+
         <div class="description-section">
             <h2>Description</h2>
             <p>very description</p>
         </div>
+
         <div class="embed-section">
             <h2>Final PCB Design</h2>
-            <iframe src="https://tracespace.io/view/?boardUrl=https%3A%2F%2Fraw.githubusercontent.com%2FJumpSushi%2Fmtrstalker%2Fmain%2Fmtrgerber.zip"></iframe>
+            <iframe src="https://tracespace.io/view/?boardUrl=https%3A%2F%2Fraw.githubusercontent.com%2FJumpSushi%2Fmtrstalker%2Fmain%2Fpcb%2Fmtrgerber.zip"></iframe>
         </div>
+
         <div class="bom-section">
             <h2>Bill of Materials (BOM)</h2>
             <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQsy_H-FAUhzxTOaep1nTXmmBmow1XRcCTzLxEYd9jLdOZoQAsqlvt8lDDC_Igs_g/pubhtml?widget=true&amp;headers=false"></iframe>
         </div>
     </div>
-    <script src="scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
 </body>
 </html>
