@@ -1,5 +1,7 @@
 # Mtracker
 
+Now, before you say anything about this being unpractical, THIS IS AN ART INSTALLATION (to me, atleast)
+
 
 What is MTRacker? It is just a simple PCB design inspired by the ones on traintrackr.io for the Hong Kong MTR metro system.
 
@@ -27,6 +29,7 @@ Thank you for reading this.
 You might of noticed a folder named server. Well.... long story short, I was having some issues with the MTR API, and I thoght it was a cors error. So then I dedicated 3 hours of my life trying to build a backend on nest to prase the data and make my own mtr next train api. Turns out, I'm an idiot, and I put station in the URL instead of "sta" as stated in the documentaition. Anyways, the server should work (in theory), but I haven't tested it.
 
 Lightbox for the images from https://cdnjs.com/libraries/lightbox2/2.11.5 (updated from 2.11.3, didn't realise a new one exsisted.)
+
 moment.js for dispalying dates on tracker.html from https://cdnjs.com/libraries/moment.js 
 Tracker.html was worked on another editor, so unfortunatley, some of the hours didn't count 
 
