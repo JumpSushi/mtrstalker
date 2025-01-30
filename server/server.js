@@ -1,10 +1,13 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const axios = require('./config');
+const axios = require('axios');
+const config = require('./config');
 const logger = require('./utils/logger');
 const rateLimiter = require('./middleware/rateLimiter');
-const app = express();
+
+// Rest of your server.js code...
 
 app.use(helmet());
 app.use(cors({
