@@ -10,12 +10,16 @@ This design uses 66 addressable LEDS (WS2812E), to avoid the uneeded complexity 
 
 This design also uses a ESP32-WROOM-32E, with an onboard antenna with 8MB of flash storage. It should be plenty, if not excessive. 
 
+I've also built a python script that tracks the location, as the physical version won't arrive before High Seas ends. A web version is being worked on as we speak.
+
+The python script can be found under the folder "script". Downlaod both, and run "gui.py".
+
 The full BOM (Bill of materials) can be found at: https://github.com/JumpSushi/mtrstalker/raw/refs/heads/main/pcb/bomtrackr.xlsx
 
 The Schematic can be found at https://github.com/JumpSushi/mtrstalker/blob/main/pcb/SCH_Schematic1_2025-01-29.pdf
 
 Thank you for reading this.
 
-Lightbox for the images from https://cdnjs.com/libraries/lightbox2/2.11.3
+Lightbox for the images from https://cdnjs.com/libraries/lightbox2/2.11.5 (updated from 2.11.3, didn't realise a new one exsisted.)
 
 gui.py was made with assistance from Artifical Stupidity (Intelligence)

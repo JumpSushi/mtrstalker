@@ -5,13 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTRacker</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/css/lightbox.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
         <div class="header-section">
             <h1>MTRacker</h1>
-            <a href="https://github.com/JumpSushi/mtrstalker" class="github-link">View on GitHub</a>
+            <a href="https://github.com/JumpSushi/mtrstalker" class="github-link">View on GutHib</a>
+        </div>
+
+        <div class="description-section">
+            <h2>Description</h2>
+            <div class="description-content">
+                <h3>Quick Overview</h3>
+                <p>MTRacker is a simple PCB design inspired by traintrackr.io for the Hong Kong Kwun Tong Line MTR metro system.</p>
+                
+                <h3>Key Components</h3>
+                <ul>
+                    <li><strong>LEDs:</strong> 66 addressable WS2812E LEDs
+                        <ul>
+                            <li>Chosen for small form factor while maintaining WS2812B benefits</li>
+                            <li>Allows color customization without complex LED controllers</li>
+                        </ul>
+                    </li>
+                    <li><strong>Microcontroller:</strong> ESP32-WROOM-32E
+                        <ul>
+                            <li>Built-in antenna</li>
+                            <li>8MB flash storage</li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <h3>Technical Specifications</h3>
+                <div class="specs-grid">
+                    <div class="spec-item">
+                        <span class="spec-label">Board Size:</span>
+                        <span class="spec-value">10500x2500 mil</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Thickness:</span>
+                        <span class="spec-value">1.6 mm (63 mils)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Material:</span>
+                        <span class="spec-value">FR4</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Finish:</span>
+                        <span class="spec-value">ENIG</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Layers:</span>
+                        <span class="spec-value">2</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Copper Thickness:</span>
+                        <span class="spec-value">35 µm</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Solder Mask:</span>
+                        <span class="spec-value">TOP / BOTTOM (Green)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Silk Screen:</span>
+                        <span class="spec-value">TOP / BOTTOM (White)</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="images-section">
@@ -41,30 +101,6 @@
             </div>
         </div>
 
-        <div class="description-section">
-            <h2>Description</h2>
-            <p>What is MTRacker? It is just a simple PCB design inspired by the ones on traintrackr.io for the Hong Kong MTR metro system.
-
-                This design uses 66 addressable LEDS (WS2812E), to avoid the uneeded complexity of LED controllers, + you can change the color! I chose WS2812Es instead of the commonly seen and used WS2812B because of it's small form factor, while it still keeps all the benifits of the redesigned WS2812B.
-                
-                This design also uses a ESP32-WROOM-32E, with an onboard antenna with 8MB of flash storage. It should be plenty, if not excessive
-            
-                Board size: 10500x2500 mil
-
-                This is the size of the rectangle that contains the board
-                Thickness: 1.6 mm (63 mils)
-                Material: FR4
-                Finish: ENIG
-                Layers: 2
-                Copper thickness: 35 µm
-                Solder mask: TOP / BOTTOM
-                
-                Color: Green
-                Silk screen: TOP / BOTTOM
-                
-                Color: White</p>
-        </div>
-
         <div class="embed-section">
             <h2>Final PCB Design</h2>
             <iframe src="https://tracespace.io/view/?boardUrl=https%3A%2F%2Fraw.githubusercontent.com%2FJumpSushi%2Fmtrstalker%2Fmain%2Fpcb%2Fmtrgerber.zip"></iframe>
@@ -74,7 +110,18 @@
             <h2>Bill of Materials (BOM)</h2>
             <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQsy_H-FAUhzxTOaep1nTXmmBmow1XRcCTzLxEYd9jLdOZoQAsqlvt8lDDC_Igs_g/pubhtml?widget=true&amp;headers=false"></iframe>
         </div>
+
+        <div class="software-section">
+            <h2>Software Implementation</h2>
+            <p>I've built a sample Python script with TKinter for train tracking, using MTR's API. 
+               You can find the implementation in the <a href="https://github.com/JumpSushi/mtrstalker/blob/main/gui.py">GitHub repository</a>. 
+               Note: To run the script, you'll need to download both gui.py and api.py files.</p>
+            
+            <p>A web version of the tracker will be available soon. (Under Development)</p>
+
+            <p>Unfortunately, I didn't get the board manufactured within the time limit of High Seas, so I'll be unable to provide the code for the ESP32 for a little while. I'll do so ASAP when I receive the board.</p>
+        </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.5/js/lightbox-plus-jquery.min.js"></script>
 </body>
 </html>

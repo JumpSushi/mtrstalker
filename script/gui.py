@@ -31,7 +31,7 @@ class mtrstalker:
         self.running = True
         self.last_update = 0
         self.update_interval = 5
-        self.map_update_interval = 100  # milliseconds
+        self.map_update_interval = 100 
         self.continuous_update = True
         self.current_up_trains = []
         self.current_down_trains = []
@@ -45,8 +45,8 @@ class mtrstalker:
         main_container.grid(row=0, column=0, sticky="nsew")
         
         # Make rows expandable
-        main_container.grid_rowconfigure(1, weight=3)  # Timetables get more space
-        main_container.grid_rowconfigure(2, weight=1)  # Map gets less space
+        main_container.grid_rowconfigure(1, weight=3)
+        main_container.grid_rowconfigure(2, weight=1) 
         main_container.grid_columnconfigure(0, weight=1)
         main_container.grid_columnconfigure(1, weight=1)
 
