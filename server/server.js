@@ -7,7 +7,6 @@ const config = require('./config');
 const logger = require('./utils/logger');
 const rateLimiter = require('./middleware/rateLimiter');
 
-// Initialize express app
 const app = express();
 
 app.use(helmet());
@@ -17,7 +16,6 @@ app.use(cors({
 }));
 app.use(rateLimiter);
 
-// Health check endpoint
 app.get('/health', (req, res) => {
     res.json({
         status: 'OK',
@@ -74,12 +72,10 @@ app.get('/api/schedule', async (req, res) => {
     }
 });
 
-// Start server
 app.listen(config.port, () => {
     logger.info(`Server running on port ${config.port}`);
 });
 
-// Error handling
 process.on('uncaughtException', (error) => {
     logger.error('Uncaught exception:', error);
     process.exit(1);
