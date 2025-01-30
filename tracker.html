@@ -1,1 +1,200 @@
-// todo
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTR Kwun Tong Line Schedule</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            background-color: #57A45A;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .station-select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .schedule-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .direction {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .train {
+            border-left: 4px solid #57A45A;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f8f8;
+        }
+        .time {
+            font-weight: bold;
+            color: #57A45A;
+        }
+        .platform {
+            display: inline-block;
+            background: #57A45A;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .message {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: #666;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #57A45A;
+        }
+        h1 {
+            margin: 0;
+        }
+        h2 {
+            color: #57A45A;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>MTR Kwun Tong Line Schedule</h1>
+    </div>
+    
+    <select class="station-select" id="stationSelect">
+        <option value="WHA">Whampoa</option>
+        <option value="HOM">Ho Man Tin</option>
+        <option value="YMT">Yau Ma Tei</option>
+        <option value="MOK">Mong Kok</option>
+        <option value="PRE">Prince Edward</option>
+        <option value="SKM">Shek Kip Mei</option>
+        <option value="KOT">Kowloon Tong</option>
+        <option value="LOF">Lok Fu</option>
+        <option value="WTS">Wong Tai Sin</option>
+        <option value="DIH">Diamond Hill</option>
+        <option value="CHH">Choi Hung</option>
+        <option value="KOB">Kowloon Bay</option>
+        <option value="NTK">Ngau Tau Kok</option>
+        <option value="KWT">Kwun Tong</option>
+        <option value="LAT">Lam Tin</option>
+        <option value="YAT">Yau Tong</option>
+        <option value="TIK">Tiu Keng Leng</option>
+    </select>
+
+    <div class="schedule-container">
+        <div class="direction">
+            <h2>Upbound</h2>
+            <div id="upbound"></div>
+        </div>
+        <div class="direction">
+            <h2>Downbound</h2>
+            <div id="downbound"></div>
+        </div>
+    </div>
+
+    <div id="message" class="message"></div>
+
+    <script>
+        const stationSelect = document.getElementById('stationSelect');
+        const upboundContainer = document.getElementById('upbound');
+        const downboundContainer = document.getElementById('downbound');
+        const messageContainer = document.getElementById('message');
+
+        async function fetchSchedule(station) {
+            try {
+                const apiUrl = `https://rt.data.gov.hk/v1/transport/mtr/getSchedule.php?line=KTL&sta=${station}`;
+                
+                upboundContainer.innerHTML = '<div class="loading">Loading...</div>';
+                downboundContainer.innerHTML = '<div class="loading">Loading...</div>';
+                
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                
+                return data;
+            } catch (error) {
+                console.error('Error fetching schedule:', error);
+                messageContainer.textContent = 'Failed to fetch schedule. The MTR API may be temporarily unavailable. Please try again later.';
+                upboundContainer.innerHTML = '';
+                downboundContainer.innerHTML = '';
+                return null;
+            }
+        }
+
+        function formatTime(time) {
+            return moment(time).format('HH:mm');
+        }
+
+        function displaySchedule(data) {
+            if (!data || data.status === 0) {
+                messageContainer.textContent = data?.message || 'No schedule data available';
+                upboundContainer.innerHTML = '';
+                downboundContainer.innerHTML = '';
+                return;
+            }
+
+            messageContainer.textContent = '';
+            const stationKey = `KTL-${stationSelect.value}`;
+            const scheduleData = data.data[stationKey];
+
+            if (!scheduleData) {
+                messageContainer.textContent = 'No schedule data available for this station';
+                return;
+            }
+            upboundContainer.innerHTML = (scheduleData.UP || [])
+                .map(train => `
+                    <div class="train">
+                        <span class="time">${formatTime(train.time)}</span>
+                        <span class="platform">Platform ${train.plat}</span>
+                        <div>To: ${train.dest}</div>
+                        <div>Minutes until arrival: ${train.ttnt}</div>
+                    </div>
+                `)
+                .join('') || 'No upcoming trains';
+
+            downboundContainer.innerHTML = (scheduleData.DOWN || [])
+                .map(train => `
+                    <div class="train">
+                        <span class="time">${formatTime(train.time)}</span>
+                        <span class="platform">Platform ${train.plat}</span>
+                        <div>To: ${train.dest}</div>
+                        <div>Minutes until arrival: ${train.ttnt}</div>
+                    </div>
+                `)
+                .join('') || 'No upcoming trains';
+        }
+
+        async function updateSchedule() {
+            const data = await fetchSchedule(stationSelect.value);
+            displaySchedule(data);
+        }
+
+        stationSelect.addEventListener('change', updateSchedule);
+        setInterval(updateSchedule, 3000);
+        updateSchedule();
+    </script>
+</body>
+</html>

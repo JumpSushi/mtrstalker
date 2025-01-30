@@ -9,12 +9,22 @@ const rateLimiter = require('./middleware/rateLimiter');
 
 const app = express();
 
+// Middleware setup
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(helmet());
 app.use(cors({
     origin: config.allowedOrigins,
     methods: ['GET']
 }));
 app.use(rateLimiter);
+
+// Basic error handling
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something went wrong!');
+});
 
 app.get('/health', (req, res) => {
     res.json({
@@ -25,9 +35,9 @@ app.get('/health', (req, res) => {
 
 app.get('/api/schedule', async (req, res) => {
     try {
-        const { line, station } = req.query;
+        const { line, sta } = req.query;
 
-        if (!line || !station) {
+        if (!line || !sta) {
             return res.status(400).json({
                 error: 'Required parameters missing',
                 details: 'Both line and station parameters are required'
@@ -35,13 +45,13 @@ app.get('/api/schedule', async (req, res) => {
         }
 
         const response = await axios.get(config.mtrApi, {
-            params: { line, station },
+            params: { line, sta },
             timeout: 5000
         });
 
         logger.info('MTR API request successful', {
             line,
-            station,
+            sta,
             status: response.status
         });
 
@@ -50,7 +60,7 @@ app.get('/api/schedule', async (req, res) => {
         logger.error('MTR API request failed', {
             error: error.message,
             line: req.query.line,
-            station: req.query.station
+            sta: req.query.station
         });
 
         if (error.response) {
@@ -72,8 +82,18 @@ app.get('/api/schedule', async (req, res) => {
     }
 });
 
-app.listen(config.port, () => {
+// Start server
+const server = app.listen(config.port, () => {
     logger.info(`Server running on port ${config.port}`);
+});
+
+// Graceful shutdown
+process.on('SIGINT', () => {
+  console.log('Gracefully shutting down...');
+  server.close(() => {
+    console.log('Server closed');
+    process.exit(0);
+  });
 });
 
 process.on('uncaughtException', (error) => {
@@ -85,4 +105,6 @@ process.on('unhandledRejection', (error) => {
     logger.error('Unhandled rejection:', error);
     process.exit(1);
 });
+
+module.exports = app;
 

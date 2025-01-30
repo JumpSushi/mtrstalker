@@ -2,9 +2,7 @@ require('dotenv').config();
 
 const config = {
     port: process.env.PORT || 3456,
-    allowedOrigins: process.env.ALLOWED_ORIGINS ? 
-        process.env.ALLOWED_ORIGINS.split(',') : 
-        ['http://localhost:3456', 'http://jumpsushi.github.io'],
+    allowedOrigins: process.env.ALLOWED_ORIGINS || '*',
     rateLimit: {
         windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
         max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100

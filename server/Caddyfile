@@ -1,0 +1,11 @@
+{
+  admin unix//home/jumpsushi/caddy-admin.sock
+}
+http://jumpsushi.hackclub.app {
+    bind unix/.webserver.sock|777
+    root * /home/jumpsushi/pub
+    file_server {
+        hide .git .env
+    }
+    reverse_proxy :3456
+}
