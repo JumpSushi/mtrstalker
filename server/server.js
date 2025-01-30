@@ -7,7 +7,8 @@ const config = require('./config');
 const logger = require('./utils/logger');
 const rateLimiter = require('./middleware/rateLimiter');
 
-// Rest of your server.js code...
+// Initialize express app
+const app = express();
 
 app.use(helmet());
 app.use(cors({
@@ -16,67 +17,76 @@ app.use(cors({
 }));
 app.use(rateLimiter);
 
+// Health check endpoint
 app.get('/health', (req, res) => {
     res.json({
         status: 'OK',
-        timestamp: new Date().toISOString
+        timestamp: new Date().toISOString()
     });
 });
-app.get('/api/schedule', async (req, res) =>{
-    try{
-        const {line, station} = req.query;
+
+app.get('/api/schedule', async (req, res) => {
+    try {
+        const { line, station } = req.query;
 
         if (!line || !station) {
-            return res.status(400).json ({
-                error: 'Required parameters missing, idiot.',
-                details: 'Did you include both line and station parameters?'
+            return res.status(400).json({
+                error: 'Required parameters missing',
+                details: 'Both line and station parameters are required'
             });
         }
 
         const response = await axios.get(config.mtrApi, {
-            params: {line, station},
+            params: { line, station },
             timeout: 5000
         });
 
-        logger.info('MTR API request OK', {
+        logger.info('MTR API request successful', {
             line,
             station,
             status: response.status
         });
 
         res.json(response.data);
-    } catch (error){
-        logger.error('MTR API request failed ', {
+    } catch (error) {
+        logger.error('MTR API request failed', {
             error: error.message,
             line: req.query.line,
             station: req.query.station
-
         });
-        if (error.response){
+
+        if (error.response) {
             res.status(error.response.status).json({
                 error: 'MTR API error',
                 details: error.response.data
             });
         } else if (error.request) {
             res.status(503).json({
-                error:'MTR API is dead',
-                details: 'temporarily unavalible'
+                error: 'MTR API unavailable',
+                details: 'Service temporarily unavailable'
             });
         } else {
             res.status(500).json({
                 error: 'Internal server error',
-                details: 'Im serious, not sure whats happening'
+                details: 'An unexpected error occurred'
             });
         }
-
     }
 });
 
+// Start server
 app.listen(config.port, () => {
-    logger.info('Server is runnig on the mystical port of ${config.port}');
+    logger.info(`Server running on port ${config.port}`);
 });
 
-ProcessingInstruction.on('uncaughtException', (error) => {
-    logger.error('Unhandled rejection, oof:' , error);
+// Error handling
+process.on('uncaughtException', (error) => {
+    logger.error('Uncaught exception:', error);
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (error) => {
+    logger.error('Unhandled rejection:', error);
+    process.exit(1);
 });
 
