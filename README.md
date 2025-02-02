@@ -34,3 +34,6 @@ moment.js for dispalying dates on tracker.html from https://cdnjs.com/libraries/
 Tracker.html was worked on another editor, so unfortunatley, some of the hours didn't count 
 
 gui.py was made with assistance from Artifical Stupidity (Intelligence)
+
+
+test github page (pls ignore)
