@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 const config = {
-    port: process.env.PORT || 3456,
+    port: process.env.PORT || 39507,
     allowedOrigins: process.env.ALLOWED_ORIGINS || '*',
     rateLimit: {
         windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000,
