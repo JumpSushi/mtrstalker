@@ -13,7 +13,7 @@
   }
   
   body {
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Nuito Sans', sans-serif;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Red Hat Display', sans-serif;
     line-height: 1.7;
     color: var(--text-primary);
     background: var(--bg-gradient);
